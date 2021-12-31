@@ -1,4 +1,0 @@
-arango==0.2.1
-Flask==2.0.2
-pymongo==3.12.1
-python_arango==7.2.0
