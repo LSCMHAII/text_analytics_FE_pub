@@ -37,17 +37,20 @@ class Dashboard extends React.Component {
     this.getDataFromAPI = this.getDataFromAPI.bind(this);
   }
 
-  componentDidMount() {
-    this.getDataFromAPI("Front-end person is telling that should to have only one request to that API to have user authenticated and authorized at the same time with response back containing JWT, user role(s) and user data. Back-end person claims that front-end should to have two calls");
-    console.log("send api");
-  }
-
   handleSearchClick(para) {
     this.getDataFromAPI(para);
     console.log("send api");
   }
 
-  getDataFromAPI(para) {
+  async getDataFromAPI(para) {
+    // const response = await fetch('/test');
+    // const json = response.json();
+    // json.map(jsonResult => this.setState({
+    //   data: {
+    //     nodes: jsonResult["nodes"].map(element => this.createNode(element, element)),
+    //     edges: jsonResult["edges"].map(element => this.createEdge(element["from"], element["to"], element["value"]))
+    //   }
+    // }));
 
     fetch('/test').then(response => response.json())
       .then(jsonResult => this.setState({

@@ -71,7 +71,7 @@ https://localhost:3000
     ```
 5. Run the React server and browse
 
-    <a>localhost:3000/#/app/new_page</a>
+    [localhost:3000/#/app/new_page](localhost:3000/#/app/new_page)
 
 6. To add a button to redirect to the new page, add the following code in [src/components/Layout/Layout.js](src/components/Layout/Layout.js)
     ```javascript
