@@ -130,3 +130,6 @@ dmypy.json
 
 # Javascript packages
 node_modules
+
+# docker compose
+docker-compose.yml
