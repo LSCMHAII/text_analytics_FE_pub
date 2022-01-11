@@ -12,10 +12,7 @@ import '../styles/theme.scss';
 import LayoutComponent from '../components/Layout';
 import Login from '../pages/login';
 import Register from '../pages/register';
-<<<<<<< HEAD
-=======
 import History from '../pages/history';
->>>>>>> historyPage
 import { logoutUser } from '../actions/user';
 
 const PrivateRoute = ({ dispatch, component, ...rest }) => {
