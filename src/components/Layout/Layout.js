@@ -12,6 +12,7 @@ import MapsGoogle from '../../pages/components/maps/google';
 import CoreTypography from '../../pages/typography';
 import Charts from '../../pages/components/charts/Charts';
 import Dashboard from '../../pages/dashboard';
+import Lists from '../../pages/components/lists';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -85,6 +86,7 @@ class Layout extends React.Component {
                     <Route path="/app/tables" exact component={TablesStatic} />
                     <Route path="/app/components/maps" exact component={MapsGoogle} />
                     <Route path="/app/typography" exact component={CoreTypography} />
+                    <Route path="/app/components/lists" exact component={Lists} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>
