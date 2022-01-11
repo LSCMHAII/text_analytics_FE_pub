@@ -8,8 +8,7 @@ import Rickshaw from "./components/rickshaw/Rickshaw";
 
 import AnimateNumber from "react-animated-number";
 
-// import s from "./Dashboard.module.scss";
-import './Dashboard.module.scss'
+import s from "./Dashboard.module.scss";
 
 import peopleA1 from "../../assets/people/a1.jpg";
 import peopleA2 from "../../assets/people/a2.jpg";
@@ -34,22 +33,35 @@ class Dashboard extends React.Component {
     this.state = { data: {} };
     console.log(this.state.data);
     this.handleSearchClick = this.handleSearchClick.bind(this);
-    this.getDataFromAPI = this.getDataFromAPI.bind(this);
+    this.getDataFromTestAPI = this.getDataFromTestAPI.bind(this);
+    this.getDataFromConceptnetAPI = this.getDataFromConceptnetAPI.bind(this);
   }
 
   componentDidMount() {
-    this.getDataFromAPI("Front-end person is telling that should to have only one request to that API to have user authenticated and authorized at the same time with response back containing JWT, user role(s) and user data. Back-end person claims that front-end should to have two calls");
+    this.getDataFromTestAPI("apple,banana");
     console.log("send api");
   }
 
   handleSearchClick(para) {
-    this.getDataFromAPI(para);
+    this.getDataFromConceptnetAPI(para);
     console.log("send api");
   }
 
-  getDataFromAPI(para) {
+  getDataFromConceptnetAPI(para) {
+    const searchQuery = para.split(",");
 
-    fetch('/test').then(response => response.json())
+    fetch('/database/conceptnet?' + "word1=" + searchQuery[0].trim() + "&word2=" + searchQuery[1].trim()).then(response => response.json())
+      .then(jsonResult => this.setState({
+        data: {
+          nodes: jsonResult["nodes"].map(element => this.createNode(element, element)),
+          edges: jsonResult["edges"].map(element => this.createEdge(element["from"], element["to"], element["value"]))
+        }
+      }));
+  }
+
+  getDataFromTestAPI(para) {
+
+    fetch('/database/test').then(response => response.json())
       .then(jsonResult => this.setState({
         data: {
           nodes: jsonResult["nodes"].map(element => this.createNode(element, element)),
@@ -87,7 +99,6 @@ class Dashboard extends React.Component {
 
     if (Object.keys(this.state.data).length > 0) {
       return (<div>
-        <div className="hellokitty"><h1>Test </h1></div>
         <Graphin data={this.state.data} layout={{ type: 'graphin-force' }} theme={{ mode: 'dark' }} height="100%">
           <Hoverable bindType="node" />
           <Hoverable bindType="edge" />
@@ -95,8 +106,13 @@ class Dashboard extends React.Component {
         </Graphin>
         <SearchBar name={"Search"}
           onSearchClick={this.handleSearchClick}
+
         />
-        {/* <Histree /> */}
+        <SearchBar name={"Search1"}
+          onSearchClick={this.handleSearchClick}
+
+        />
+        <Histree />
       </div>
       );
     }

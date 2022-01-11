@@ -1,15 +1,15 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Progress, Alert} from 'reactstrap';
-import {withRouter} from 'react-router-dom';
-import {dismissAlert} from '../../actions/alerts';
+import { connect } from 'react-redux';
+import { Progress, Alert } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
+import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.module.scss';
 import LinksGroup from './LinksGroup';
 
-import {changeActiveSidebarItem} from '../../actions/navigation';
-import {logoutUser} from '../../actions/user';
+import { changeActiveSidebarItem } from '../../actions/navigation';
+import { logoutUser } from '../../actions/user';
 import HomeIcon from '../Icons/SidebarIcons/HomeIcon';
 import TypographyIcon from '../Icons/SidebarIcons/TypographyIcon';
 import TablesIcon from '../Icons/SidebarIcons/TablesIcon';
@@ -115,7 +115,7 @@ class Sidebar extends React.Component {
                         activeItem={this.props.activeItem}
                         header="Notifications"
                         isHeader
-                        iconName={<NotificationsIcon className={s.menuIcon}/>}
+                        iconName={<NotificationsIcon className={s.menuIcon} />}
                         link="/app/notifications"
                         index="ui"
                     />
@@ -124,7 +124,7 @@ class Sidebar extends React.Component {
                         activeItem={this.props.activeItem}
                         header="Components"
                         isHeader
-                        iconName={<ComponentsIcon className={s.menuIcon}/>}
+                        iconName={<ComponentsIcon className={s.menuIcon} />}
                         link="/app/components"
                         index="components"
                         childrenLinks={[
@@ -139,6 +139,15 @@ class Sidebar extends React.Component {
                             },
                         ]}
                     />
+                    <LinksGroup
+                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+                        activeItem={this.props.activeItem}
+                        header="History"
+                        isHeader
+                        iconName={<TypographyIcon className={s.menuIcon} />}
+                        link="/app/history"
+                        index="history"
+                    />
                 </ul>
                 <h5 className={s.navTitle}>
                     LABELS
@@ -148,19 +157,19 @@ class Sidebar extends React.Component {
                 <ul className={s.sidebarLabels}>
                     <li>
                         <a href="#">
-                            <i className="fa fa-circle text-success mr-2"/>
+                            <i className="fa fa-circle text-success mr-2" />
                             <span className={s.labelName}>My Recent</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i className="fa fa-circle text-primary mr-2"/>
+                            <i className="fa fa-circle text-primary mr-2" />
                             <span className={s.labelName}>Starred</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i className="fa fa-circle text-danger mr-2"/>
+                            <i className="fa fa-circle text-danger mr-2" />
                             <span className={s.labelName}>Background</span>
                         </a>
                     </li>
@@ -173,16 +182,16 @@ class Sidebar extends React.Component {
                     {this.props.alertsList.map(alert => // eslint-disable-line
                         <Alert
                             key={alert.id}
-                            className={s.sidebarAlert} 
+                            className={s.sidebarAlert}
                             color="transparent"
                             isOpen={true} // eslint-disable-line
                             toggle={() => {
                                 this.dismissAlert(alert.id);
                             }}
                         >
-                            <span>{alert.title}</span><br/>
+                            <span>{alert.title}</span><br />
                             <Progress className={`bg-subtle-blue progress-xs mt-1`} color={alert.color}
-                                      value={alert.value}/>
+                                value={alert.value} />
                             <span className={s.alertFooter}>{alert.footer}</span>
                         </Alert>,
                     )}
