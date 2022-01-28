@@ -41,7 +41,7 @@
       "<rootDir>/src/**/__tests__/**/*.{js,jsx}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx}"
     ],
-    "testURL": "http://text-flask",
+    "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
@@ -95,7 +95,7 @@
     "react-sparklines": "^1.7.0",
     "react-toastify": "^7.0.3",
     "react-transition-group": "^4.4.1",
-    "react-tree-graph": "^5.1.1",
+    "react-tree-graph": "^6.1.0",
     "reactstrap": "8.5.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
@@ -154,7 +154,7 @@
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.2.3",
     "url-loader": "4.1.0",
-    "webpack": "^4.43.0",
+    "webpack": "4.43.0",
     "webpack-dev-server": "3.11.0",
     "webpack-manifest-plugin": "2.2.0",
     "webpack-raphael": "2.1.4",

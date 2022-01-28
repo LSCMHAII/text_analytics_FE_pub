@@ -8,8 +8,7 @@ import Rickshaw from "./components/rickshaw/Rickshaw";
 
 import AnimateNumber from "react-animated-number";
 
-// import s from "./Dashboard.module.scss";
-import './Dashboard.module.scss'
+import s from "./Dashboard.module.scss";
 
 import peopleA1 from "../../assets/people/a1.jpg";
 import peopleA2 from "../../assets/people/a2.jpg";
@@ -34,25 +33,35 @@ class Dashboard extends React.Component {
     this.state = { data: {} };
     console.log(this.state.data);
     this.handleSearchClick = this.handleSearchClick.bind(this);
-    this.getDataFromAPI = this.getDataFromAPI.bind(this);
+    this.getDataFromTestAPI = this.getDataFromTestAPI.bind(this);
+    this.getDataFromConceptnetAPI = this.getDataFromConceptnetAPI.bind(this);
   }
 
-  handleSearchClick(para) {
-    this.getDataFromAPI(para);
+  componentDidMount() {
+    this.getDataFromTestAPI("apple,banana");
     console.log("send api");
   }
 
-  async getDataFromAPI(para) {
-    // const response = await fetch('/test');
-    // const json = response.json();
-    // json.map(jsonResult => this.setState({
-    //   data: {
-    //     nodes: jsonResult["nodes"].map(element => this.createNode(element, element)),
-    //     edges: jsonResult["edges"].map(element => this.createEdge(element["from"], element["to"], element["value"]))
-    //   }
-    // }));
+  handleSearchClick(para) {
+    this.getDataFromConceptnetAPI(para);
+    console.log("send api");
+  }
 
-    fetch('/test').then(response => response.json())
+  getDataFromConceptnetAPI(para) {
+    const searchQuery = para.split(",");
+
+    fetch('/database/conceptnet?' + "word1=" + searchQuery[0].trim() + "&word2=" + searchQuery[1].trim()).then(response => response.json())
+      .then(jsonResult => this.setState({
+        data: {
+          nodes: jsonResult["nodes"].map(element => this.createNode(element, element)),
+          edges: jsonResult["edges"].map(element => this.createEdge(element["from"], element["to"], element["value"]))
+        }
+      }));
+  }
+
+  getDataFromTestAPI(para) {
+
+    fetch('/database/test').then(response => response.json())
       .then(jsonResult => this.setState({
         data: {
           nodes: jsonResult["nodes"].map(element => this.createNode(element, element)),
@@ -90,7 +99,6 @@ class Dashboard extends React.Component {
 
     if (Object.keys(this.state.data).length > 0) {
       return (<div>
-        <div className="hellokitty"><h1>Test </h1></div>
         <Graphin data={this.state.data} layout={{ type: 'graphin-force' }} theme={{ mode: 'dark' }} height="100%">
           <Hoverable bindType="node" />
           <Hoverable bindType="edge" />
@@ -98,8 +106,13 @@ class Dashboard extends React.Component {
         </Graphin>
         <SearchBar name={"Search"}
           onSearchClick={this.handleSearchClick}
+
         />
-        {/* <Histree /> */}
+        <SearchBar name={"Search1"}
+          onSearchClick={this.handleSearchClick}
+
+        />
+        <Histree />
       </div>
       );
     }

@@ -142,6 +142,15 @@ class Sidebar extends React.Component {
                             },
                         ]}
                     />
+                    <LinksGroup
+                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+                        activeItem={this.props.activeItem}
+                        header="History"
+                        isHeader
+                        iconName={<TypographyIcon className={s.menuIcon} />}
+                        link="/app/history"
+                        index="history"
+                    />
                 </ul>
                 <h5 className={s.navTitle}>
                     LABELS

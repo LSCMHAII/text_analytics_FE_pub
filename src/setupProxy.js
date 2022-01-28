@@ -9,5 +9,13 @@ module.exports = function (app) {
         })
     );
 
+    app.use(
+        '/database/conceptnet',
+        createProxyMiddleware({
+            target: 'http://text-flask:5000',
+            changeOrigin: true,
+        })
+    );
+
 
 };
